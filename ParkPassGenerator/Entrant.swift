@@ -170,14 +170,14 @@ enum EntrantError: Error {
 
 // Entrant
 
-enum EntrantType {
-    case GuestClassic
-    case GuestVip
-    case GuestChild
-    case EmployeeFood
-    case EmployeeRide
-    case EmployeeMaintenance
-    case Manager
+enum EntrantType: String {
+    case GuestClassic = "Classic Guest"
+    case GuestVip = "VIP Guest"
+    case GuestChild = "Free Child Guest"
+    case EmployeeFood = "Hourly Employee - Food Services"
+    case EmployeeRide = "Hourly Employee - Ride Services"
+    case EmployeeMaintenance = "Hourly Employee - Maintenance"
+    case Manager = "Manager"
 }
 
 class Entrant: Areable, Accessable, Discountable, Requirementable, CustomStringConvertible {
@@ -271,7 +271,7 @@ class Entrant: Areable, Accessable, Discountable, Requirementable, CustomStringC
     }
     
     var description: String {
-        var descriptionString: String = ""
+        var descriptionString: String = "Type: \(self.type.rawValue), "
         if let fullName = self.fullName {
             descriptionString += "Name: \(fullName), "
         }

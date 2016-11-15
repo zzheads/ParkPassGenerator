@@ -15,6 +15,10 @@
 		A6B687731DDB2452009FB53C /* ParkPassGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B687721DDB2452009FB53C /* ParkPassGeneratorTests.swift */; };
 		A6B6877E1DDB2452009FB53C /* ParkPassGeneratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6877D1DDB2452009FB53C /* ParkPassGeneratorUITests.swift */; };
 		A6B6878E1DDB34CF009FB53C /* Entrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6878D1DDB34CF009FB53C /* Entrant.swift */; };
+		A6B687931DDB7BD0009FB53C /* AccessDenied.wav in Resources */ = {isa = PBXBuildFile; fileRef = A6B687911DDB7BD0009FB53C /* AccessDenied.wav */; };
+		A6B687941DDB7BD0009FB53C /* AccessGranted.wav in Resources */ = {isa = PBXBuildFile; fileRef = A6B687921DDB7BD0009FB53C /* AccessGranted.wav */; };
+		A6B687971DDB7F37009FB53C /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B687961DDB7F37009FB53C /* Sound.swift */; };
+		A6B687991DDB8241009FB53C /* UserInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B687981DDB8241009FB53C /* UserInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		A6B6877D1DDB2452009FB53C /* ParkPassGeneratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkPassGeneratorUITests.swift; sourceTree = "<group>"; };
 		A6B6877F1DDB2452009FB53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6B6878D1DDB34CF009FB53C /* Entrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entrant.swift; sourceTree = "<group>"; };
+		A6B687911DDB7BD0009FB53C /* AccessDenied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = AccessDenied.wav; path = Sounds/AccessDenied.wav; sourceTree = SOURCE_ROOT; };
+		A6B687921DDB7BD0009FB53C /* AccessGranted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = AccessGranted.wav; path = Sounds/AccessGranted.wav; sourceTree = SOURCE_ROOT; };
+		A6B687961DDB7F37009FB53C /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		A6B687981DDB8241009FB53C /* UserInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +107,7 @@
 		A6B6875C1DDB2452009FB53C /* ParkPassGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				A6B687951DDB7BF7009FB53C /* Resources */,
 				A6B6875D1DDB2452009FB53C /* AppDelegate.swift */,
 				A6B6875F1DDB2452009FB53C /* ViewController.swift */,
 				A6B687611DDB2452009FB53C /* Main.storyboard */,
@@ -106,6 +115,8 @@
 				A6B687661DDB2452009FB53C /* LaunchScreen.storyboard */,
 				A6B687691DDB2452009FB53C /* Info.plist */,
 				A6B6878D1DDB34CF009FB53C /* Entrant.swift */,
+				A6B687961DDB7F37009FB53C /* Sound.swift */,
+				A6B687981DDB8241009FB53C /* UserInput.swift */,
 			);
 			path = ParkPassGenerator;
 			sourceTree = "<group>";
@@ -126,6 +137,15 @@
 				A6B6877F1DDB2452009FB53C /* Info.plist */,
 			);
 			path = ParkPassGeneratorUITests;
+			sourceTree = "<group>";
+		};
+		A6B687951DDB7BF7009FB53C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A6B687911DDB7BD0009FB53C /* AccessDenied.wav */,
+				A6B687921DDB7BD0009FB53C /* AccessGranted.wav */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,8 +259,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6B687681DDB2452009FB53C /* LaunchScreen.storyboard in Resources */,
+				A6B687941DDB7BD0009FB53C /* AccessGranted.wav in Resources */,
 				A6B687651DDB2452009FB53C /* Assets.xcassets in Resources */,
 				A6B687631DDB2452009FB53C /* Main.storyboard in Resources */,
+				A6B687931DDB7BD0009FB53C /* AccessDenied.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,8 +288,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6B687601DDB2452009FB53C /* ViewController.swift in Sources */,
+				A6B687991DDB8241009FB53C /* UserInput.swift in Sources */,
 				A6B6878E1DDB34CF009FB53C /* Entrant.swift in Sources */,
 				A6B6875E1DDB2452009FB53C /* AppDelegate.swift in Sources */,
+				A6B687971DDB7F37009FB53C /* Sound.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

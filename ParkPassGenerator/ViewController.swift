@@ -13,6 +13,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let entrant = Entrant(type: .EmployeeMaintenance)
+        print("Entrant: \(entrant)\n")
+        print("Areas: \(entrant.areas)")
+        print("Access: \(entrant.access)")
+        print("Discount: \(entrant.discount)")
+        print("Requirements: \(entrant.requirements)")
+
     }
 
     override func didReceiveMemoryWarning() {

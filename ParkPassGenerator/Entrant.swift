@@ -10,58 +10,93 @@ import Foundation
 
 // Areable
 
-enum Area {
+enum Area: CustomStringConvertible {
     case Amusement
     case Kitchen
     case RideControl
     case Maintenance
     case Office
     
-    func area(type: EntrantType) -> [Area] {
-        switch type {
-        case .GuestClassic: return [.Amusement]
-        case .GuestVip: return [.Amusement]
-        case .GuestChild: return [.Amusement]
-        case .EmployeeFood: return [.Amusement, .Kitchen]
-        case .EmployeeRide: return [.Amusement, .RideControl]
-        case .EmployeeMaintenance: return [.Amusement, .Kitchen, .RideControl, .Maintenance]
-        case .Manager: return [.Amusement, .Kitchen, .RideControl, .Maintenance, .Office]
+    var description: String {
+        switch self {
+        case .Amusement: return "Amusement Areas"
+        case .Kitchen: return "Kitchen Areas"
+        case .RideControl: return "Ride Control Areas"
+        case .Maintenance: return "Maintenance Areas"
+        case .Office: return "Office Areas"
         }
     }
 }
 
-protocol Areable {
-    func restrictedAreas(for type: EntrantType) -> [Area]
-}
-
-extension Areable {
-    func restrictedAreas(for type: EntrantType) -> [Area] {
-        switch type {
-        case .GuestClassic: return [.Amusement]
-        case .GuestVip: return [.Amusement]
-        case .GuestChild: return [.Amusement]
-        case .EmployeeFood: return [.Amusement, .Kitchen]
-        case .EmployeeRide: return [.Amusement, .RideControl]
-        case .EmployeeMaintenance: return [.Amusement, .Kitchen, .RideControl, .Maintenance]
-        case .Manager: return [.Amusement, .Kitchen, .RideControl, .Maintenance, .Office]
-        }
-    }
-}
-
-// Accessable
-
-enum Access {
+enum Access: CustomStringConvertible {
     case AllRides
     case SkipAllRideLines
+    
+    var description: String {
+        switch self {
+        case .AllRides: return "Access all rides"
+        case .SkipAllRideLines: return "Skip all ride lines"
+        }
+    }
 }
 
-protocol Accessable {
-    func restrictedAccess(for type: EntrantType) -> [Access]
+typealias Percent = Int
+struct Discount: CustomStringConvertible {
+    let food: Percent
+    let merchant: Percent
+    
+    var description: String {
+        return "\(food)% discount on food, \(merchant)% discount on merchandise"
+    }
 }
 
-extension Accessable {
-    func restrictedAccess(for type: EntrantType) -> [Access] {
-        switch type {
+enum Requirements: CustomStringConvertible {
+    case FirstName
+    case LastName
+    case StreetAddress
+    case City
+    case State
+    case ZipCode
+    case DateOfBirth
+    
+    var description: String {
+        switch self {
+        case .FirstName: return "First Name"
+        case .LastName: return "Last Name"
+        case .City: return "City"
+        case .DateOfBirth: return "Date of Birth"
+        case .State: return "State"
+        case .StreetAddress: return "Street Address"
+        case .ZipCode: return "Zip Code"
+        }
+    }
+}
+
+// Protocol
+
+protocol Entrantable {
+    var type: EntrantType { get }
+}
+
+// Extensions
+
+extension Entrantable {
+    var areas: [Area] {
+        switch self.type {
+        case .GuestClassic: return [.Amusement]
+        case .GuestVip: return [.Amusement]
+        case .GuestChild: return [.Amusement]
+        case .EmployeeFood: return [.Amusement, .Kitchen]
+        case .EmployeeRide: return [.Amusement, .RideControl]
+        case .EmployeeMaintenance: return [.Amusement, .Kitchen, .RideControl, .Maintenance]
+        case .Manager: return [.Amusement, .Kitchen, .RideControl, .Maintenance, .Office]
+        }
+    }
+}
+
+extension Entrantable {
+    var access: [Access] {
+        switch self.type {
         case .GuestClassic: return [.AllRides]
         case .GuestVip: return [.AllRides, .SkipAllRideLines]
         case .GuestChild: return [.AllRides]
@@ -73,48 +108,23 @@ extension Accessable {
     }
 }
 
-// Discountable
-
-typealias Percent = Int
-typealias Discount = (foodDiscount: Percent, merchantDiscount: Percent)
-
-protocol Discountable {
-    func discount(for type: EntrantType) -> Discount
-}
-
-extension Discountable {
-    func discount(for type: EntrantType) -> Discount {
-        switch type {
-        case .GuestClassic: return (foodDiscount: 0, merchantDiscount: 0)
-        case .GuestVip: return (foodDiscount: 10, merchantDiscount: 20)
-        case .GuestChild: return (foodDiscount: 0, merchantDiscount: 0)
-        case .EmployeeFood: return (foodDiscount: 15, merchantDiscount: 25)
-        case .EmployeeRide: return (foodDiscount: 15, merchantDiscount: 25)
-        case .EmployeeMaintenance: return (foodDiscount: 15, merchantDiscount: 25)
-        case .Manager: return (foodDiscount: 25, merchantDiscount: 25)
+extension Entrantable {
+    var discount: Discount {
+        switch self.type {
+        case .GuestClassic: return Discount(food: 0, merchant: 0)
+        case .GuestVip: return Discount(food: 10, merchant: 20)
+        case .GuestChild: return Discount(food: 0, merchant: 0)
+        case .EmployeeFood: return Discount(food: 15, merchant: 25)
+        case .EmployeeRide: return Discount(food: 15, merchant: 25)
+        case .EmployeeMaintenance: return Discount(food: 15, merchant: 25)
+        case .Manager: return Discount(food: 25, merchant: 25)
         }
     }
 }
 
-// Requirementsable
-
-enum Requirements {
-    case FirstName
-    case LastName
-    case StreetAddress
-    case City
-    case State
-    case ZipCode
-    case DateOfBirth
-}
-
-protocol Requirementsable {
-    func requirements(for type: EntrantType) -> [Requirements]
-}
-
-extension Requirementsable {
-    func requirements(for type: EntrantType) -> [Requirements] {
-        switch type {
+extension Entrantable {
+    var requirements: [Requirements] {
+        switch self.type {
         case .GuestClassic: return []
         case .GuestVip: return []
         case .GuestChild: return [.DateOfBirth]
@@ -138,7 +148,7 @@ enum EntrantType {
     case Manager
 }
 
-class Entrant: Areable, Accessable, Discountable, Requirementsable {
+class Entrant: Entrantable, CustomStringConvertible {
     let type: EntrantType
     
     let firstName: String?
@@ -159,6 +169,10 @@ class Entrant: Areable, Accessable, Discountable, Requirementsable {
         self.state = state
         self.zipCode = zipCode
         self.dateOfBirth = dateOfBirth
+    }
+    
+    var description: String {
+        return "\(type)" // FIXME
     }
 }
 

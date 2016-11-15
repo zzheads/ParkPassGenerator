@@ -14,6 +14,7 @@
 		A6B687681DDB2452009FB53C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6B687661DDB2452009FB53C /* LaunchScreen.storyboard */; };
 		A6B687731DDB2452009FB53C /* ParkPassGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B687721DDB2452009FB53C /* ParkPassGeneratorTests.swift */; };
 		A6B6877E1DDB2452009FB53C /* ParkPassGeneratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6877D1DDB2452009FB53C /* ParkPassGeneratorUITests.swift */; };
+		A6B6878E1DDB34CF009FB53C /* Entrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6878D1DDB34CF009FB53C /* Entrant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		A6B687791DDB2452009FB53C /* ParkPassGeneratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParkPassGeneratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6B6877D1DDB2452009FB53C /* ParkPassGeneratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkPassGeneratorUITests.swift; sourceTree = "<group>"; };
 		A6B6877F1DDB2452009FB53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6B6878D1DDB34CF009FB53C /* Entrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entrant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				A6B687641DDB2452009FB53C /* Assets.xcassets */,
 				A6B687661DDB2452009FB53C /* LaunchScreen.storyboard */,
 				A6B687691DDB2452009FB53C /* Info.plist */,
+				A6B6878D1DDB34CF009FB53C /* Entrant.swift */,
 			);
 			path = ParkPassGenerator;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6B687601DDB2452009FB53C /* ViewController.swift in Sources */,
+				A6B6878E1DDB34CF009FB53C /* Entrant.swift in Sources */,
 				A6B6875E1DDB2452009FB53C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

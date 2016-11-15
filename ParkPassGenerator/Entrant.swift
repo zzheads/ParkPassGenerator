@@ -283,6 +283,10 @@ class Entrant: Areable, Accessable, Discountable, Requirementable, CustomStringC
         }
         return descriptionString // FIXME
     }
+    
+    func swipe(for check: Checking) {
+        check.check(for: self)
+    }
 }
 
 

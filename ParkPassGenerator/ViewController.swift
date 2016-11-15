@@ -38,6 +38,12 @@ class ViewController: UIViewController {
         for i in 0..<entrants.count {
             print("\(i + 1). \(entrants[i])")
         }
+        let turnstyle = RideTurnstyle()
+        let kitchen = Kitchen()
+        let cashRegister = CashRegister()
+        entrants[0].swipe(for: turnstyle)
+        entrants[1].swipe(for: kitchen)
+        entrants[3].swipe(for: cashRegister)
     }
 
     override func didReceiveMemoryWarning() {

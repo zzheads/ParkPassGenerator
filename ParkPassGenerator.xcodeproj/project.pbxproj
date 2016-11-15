@@ -19,6 +19,7 @@
 		A6B687941DDB7BD0009FB53C /* AccessGranted.wav in Resources */ = {isa = PBXBuildFile; fileRef = A6B687921DDB7BD0009FB53C /* AccessGranted.wav */; };
 		A6B687971DDB7F37009FB53C /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B687961DDB7F37009FB53C /* Sound.swift */; };
 		A6B687991DDB8241009FB53C /* UserInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B687981DDB8241009FB53C /* UserInput.swift */; };
+		A6B6879B1DDB9A52009FB53C /* AccessCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6879A1DDB9A52009FB53C /* AccessCases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		A6B687921DDB7BD0009FB53C /* AccessGranted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = AccessGranted.wav; path = Sounds/AccessGranted.wav; sourceTree = SOURCE_ROOT; };
 		A6B687961DDB7F37009FB53C /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		A6B687981DDB8241009FB53C /* UserInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInput.swift; sourceTree = "<group>"; };
+		A6B6879A1DDB9A52009FB53C /* AccessCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessCases.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				A6B6878D1DDB34CF009FB53C /* Entrant.swift */,
 				A6B687961DDB7F37009FB53C /* Sound.swift */,
 				A6B687981DDB8241009FB53C /* UserInput.swift */,
+				A6B6879A1DDB9A52009FB53C /* AccessCases.swift */,
 			);
 			path = ParkPassGenerator;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				A6B687991DDB8241009FB53C /* UserInput.swift in Sources */,
 				A6B6878E1DDB34CF009FB53C /* Entrant.swift in Sources */,
 				A6B6875E1DDB2452009FB53C /* AppDelegate.swift in Sources */,
+				A6B6879B1DDB9A52009FB53C /* AccessCases.swift in Sources */,
 				A6B687971DDB7F37009FB53C /* Sound.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

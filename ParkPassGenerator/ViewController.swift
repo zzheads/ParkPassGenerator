@@ -13,13 +13,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let entrant = Entrant(type: .EmployeeMaintenance)
-        print("Entrant: \(entrant)\n")
-        print("Areas: \(entrant.areas)")
-        print("Access: \(entrant.access)")
-        print("Discount: \(entrant.discount)")
-        print("Requirements: \(entrant.requirements)")
-
+        do {
+            let entrant = try Entrant(type: .GuestChild, firstName: "John", lastName: "Doe", streetAddress: "Bellevare Street", city: "Montreal", state: "CA", zipCode: "400005", dateOfBirth: Date())
+            print("Entrant: \(entrant)\n")
+            print("Areas: \(entrant.areas)")
+            print("Access: \(entrant.access)")
+            print("Discount: \(entrant.discount)")
+            print("Requirements: \(entrant.requirements)")
+        } catch let error {
+            if error is EntrantError {
+                let error = error as! EntrantError
+                print("Required \(error.rawValue) did not provided. Please enter \(error.rawValue).")
+            } else {
+                fatalError("\(error)")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

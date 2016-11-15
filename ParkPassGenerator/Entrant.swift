@@ -99,9 +99,7 @@ protocol Requirementable: Entrantable {
 extension Areable {
     var areas: [Area] {
         switch self.type {
-        case .GuestClassic: return [.Amusement]
-        case .GuestVip: return [.Amusement]
-        case .GuestChild: return [.Amusement]
+        case .GuestClassic, .GuestVip, .GuestChild: return [.Amusement]
         case .EmployeeFood: return [.Amusement, .Kitchen]
         case .EmployeeRide: return [.Amusement, .RideControl]
         case .EmployeeMaintenance: return [.Amusement, .Kitchen, .RideControl, .Maintenance]
@@ -113,13 +111,8 @@ extension Areable {
 extension Accessable {
     var access: [Access] {
         switch self.type {
-        case .GuestClassic: return [.AllRides]
         case .GuestVip: return [.AllRides, .SkipAllRideLines]
-        case .GuestChild: return [.AllRides]
-        case .EmployeeFood: return [.AllRides]
-        case .EmployeeRide: return [.AllRides]
-        case .EmployeeMaintenance: return [.AllRides]
-        case .Manager: return [.AllRides]
+        default: return [.AllRides]
         }
     }
 }
@@ -141,13 +134,36 @@ extension Discountable {
 extension Requirementable {
     var requirements: [Requirements] {
         switch self.type {
-        case .GuestClassic: return []
-        case .GuestVip: return []
-        case .GuestChild: return [.DateOfBirth]
-        case .EmployeeFood: return [.FirstName, .LastName, .StreetAddress, .City, .State, .ZipCode]
-        case .EmployeeRide: return [.FirstName, .LastName, .StreetAddress, .City, .State, .ZipCode]
-        case .EmployeeMaintenance: return [.FirstName, .LastName, .StreetAddress, .City, .State, .ZipCode]
-        case .Manager: return [.FirstName, .LastName, .StreetAddress, .City, .State, .ZipCode]
+        case .GuestClassic, .GuestVip:
+            return []
+        case .GuestChild:
+            return [.DateOfBirth]
+        case .EmployeeFood, .EmployeeRide, .EmployeeMaintenance, .Manager:
+            return [.FirstName, .LastName, .StreetAddress, .City, .State, .ZipCode]
+        }
+    }
+}
+
+// Errors
+
+enum EntrantError: Error {
+    case noFirstName
+    case noLastName
+    case noStreetAddress
+    case noCity
+    case noState
+    case noZipCode
+    case noDateOfBirth
+    
+    var rawValue: String {
+        switch self {
+        case .noFirstName: return "First Name"
+        case .noLastName: return "Last Name"
+        case .noStreetAddress: return "Street Address"
+        case .noCity: return "City"
+        case .noState: return "State"
+        case .noZipCode: return "Zip Code"
+        case .noDateOfBirth: return "Date of Birth"
         }
     }
 }
@@ -175,7 +191,52 @@ class Entrant: Areable, Accessable, Discountable, Requirementable, CustomStringC
     let zipCode: String?
     let dateOfBirth: Date?
     
-    init(type: EntrantType, firstName: String? = nil, lastName: String? = nil, streetAddress: String? = nil, city: String? = nil, state: String? = nil, zipCode: String? = nil, dateOfBirth: Date? = nil) {
+    var fullName: String? {
+        if let firstName = self.firstName {
+            if let lastName = self.lastName {
+                return "\(firstName) \(lastName)"
+            } else {
+                return "\(firstName)"
+            }
+        }
+        if let lastName = self.lastName {
+            return "\(lastName)"
+        }
+        return nil
+    }
+    
+    var address: String? {
+        var address: String = ""
+        if let streetAddress = self.streetAddress {
+            address += streetAddress + ", "
+        }
+        if let city = self.city {
+            address += city + ", "
+        }
+        if let state = self.state {
+            address += state + ", "
+        }
+        if let zipCode = self.zipCode {
+            address += zipCode
+        }
+        if address.characters.count > 0 {
+            return address
+        } else {
+            return nil
+        }
+    }
+    
+    var dateOfBirthAsString: String? {
+        if let dateOfBirth = self.dateOfBirth {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            return dateFormatter.string(from: dateOfBirth)
+        } else {
+            return nil
+        }
+    }
+    
+    init(type: EntrantType, firstName: String? = nil, lastName: String? = nil, streetAddress: String? = nil, city: String? = nil, state: String? = nil, zipCode: String? = nil, dateOfBirth: Date? = nil) throws {
         self.type = type
         
         self.firstName = firstName
@@ -185,10 +246,42 @@ class Entrant: Areable, Accessable, Discountable, Requirementable, CustomStringC
         self.state = state
         self.zipCode = zipCode
         self.dateOfBirth = dateOfBirth
+        
+        if self.requirements.contains(.FirstName) && firstName == nil {
+            throw EntrantError.noFirstName
+        }
+        if self.requirements.contains(.LastName) && lastName == nil {
+            throw EntrantError.noLastName
+        }
+        if self.requirements.contains(.StreetAddress) && streetAddress == nil {
+            throw EntrantError.noStreetAddress
+        }
+        if self.requirements.contains(.City) && city == nil {
+            throw EntrantError.noCity
+        }
+        if self.requirements.contains(.State) && state == nil {
+            throw EntrantError.noState
+        }
+        if self.requirements.contains(.ZipCode) && zipCode == nil {
+            throw EntrantError.noZipCode
+        }
+        if self.requirements.contains(.DateOfBirth) && dateOfBirth == nil {
+            throw EntrantError.noDateOfBirth
+        }
     }
     
     var description: String {
-        return "\(type)" // FIXME
+        var descriptionString: String = ""
+        if let fullName = self.fullName {
+            descriptionString += "Name: \(fullName), "
+        }
+        if let address = self.address {
+            descriptionString += "Address: \(address), "
+        }
+        if let date = self.dateOfBirthAsString {
+            descriptionString += "Born: \(date)"
+        }
+        return descriptionString // FIXME
     }
 }
 

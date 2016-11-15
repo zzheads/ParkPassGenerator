@@ -72,15 +72,31 @@ enum Requirements: CustomStringConvertible {
     }
 }
 
-// Protocol
+// Protocols
 
 protocol Entrantable {
     var type: EntrantType { get }
 }
 
+protocol Areable: Entrantable {
+    var areas: [Area] { get }
+}
+
+protocol Accessable: Entrantable {
+    var access: [Access] { get }
+}
+
+protocol Discountable: Entrantable {
+    var discount: Discount { get }
+}
+
+protocol Requirementable: Entrantable {
+    var requirements: [Requirements] { get }
+}
+
 // Extensions
 
-extension Entrantable {
+extension Areable {
     var areas: [Area] {
         switch self.type {
         case .GuestClassic: return [.Amusement]
@@ -94,7 +110,7 @@ extension Entrantable {
     }
 }
 
-extension Entrantable {
+extension Accessable {
     var access: [Access] {
         switch self.type {
         case .GuestClassic: return [.AllRides]
@@ -108,7 +124,7 @@ extension Entrantable {
     }
 }
 
-extension Entrantable {
+extension Discountable {
     var discount: Discount {
         switch self.type {
         case .GuestClassic: return Discount(food: 0, merchant: 0)
@@ -122,7 +138,7 @@ extension Entrantable {
     }
 }
 
-extension Entrantable {
+extension Requirementable {
     var requirements: [Requirements] {
         switch self.type {
         case .GuestClassic: return []
@@ -148,7 +164,7 @@ enum EntrantType {
     case Manager
 }
 
-class Entrant: Entrantable, CustomStringConvertible {
+class Entrant: Areable, Accessable, Discountable, Requirementable, CustomStringConvertible {
     let type: EntrantType
     
     let firstName: String?

@@ -94,6 +94,10 @@ protocol Requirementable: Entrantable {
     var requirements: [Requirements] { get }
 }
 
+protocol Swiping {
+    func swipe()
+}
+
 // Extensions
 
 extension Areable {
